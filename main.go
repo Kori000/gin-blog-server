@@ -17,7 +17,8 @@ func main() {
 	// 初始化路由
 	router := routers.InitRouter()
 	addr := global.Config.System.Addr()
-	global.Log.Infof("gin-blog-server运行在: %s", addr)
+	global.Log.Infof("gin-blog-server 运行在: %s", addr)
+
 	router.Run(addr)
 
 }

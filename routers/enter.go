@@ -6,14 +6,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func InitRouter() *gin.Engine {
-	gin.SetMode(global.Config.System.Env)
+type RouterGroup struct {
+	*gin.RouterGroup
+}
 
+func InitRouter() *gin.Engine {
+	// 设置路由模式
+	gin.SetMode(global.Config.System.Env)
+	// 初始化路由
 	router := gin.Default()
 
-	router.GET("", func(c *gin.Context) {
-		c.String(200, "xxx")
-	})
+	apiRouterGourp := router.Group("api")
+
+	routerGroupApp := RouterGroup{apiRouterGourp}
+	// 系统配置api
+	routerGroupApp.SettingsRouter()
 
 	return router
 }
