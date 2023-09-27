@@ -30,5 +30,4 @@ func InitCore() {
 	log.Println("config yamlFile load init success.")
 
 	global.Config = c
-
 }
