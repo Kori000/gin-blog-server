@@ -2,7 +2,6 @@ package core
 
 import (
 	"gin-blog-server/global"
-	"log"
 	"time"
 
 	"gorm.io/driver/mysql"
@@ -13,7 +12,7 @@ import (
 func InitGorm() *gorm.DB {
 
 	if global.Config.Mysql.Host == "" {
-		log.Println("未配置 mysql, 取消 gorm 连接")
+		global.Log.Warnln("未配置 mysql, 取消 gorm 连接")
 		return nil
 	}
 
@@ -32,7 +31,7 @@ func InitGorm() *gorm.DB {
 		Logger: mysqlLogger,
 	})
 	if err != nil {
-		log.Fatalf("[%s] mysql 连接失败", dsn)
+		global.Log.Fatalf("[%s] mysql 连接失败", dsn)
 	}
 
 	sqlDB, _ := db.DB()
