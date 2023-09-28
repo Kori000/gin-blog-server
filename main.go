@@ -2,6 +2,7 @@ package main
 
 import (
 	"gin-blog-server/core"
+	"gin-blog-server/flag"
 	"gin-blog-server/global"
 	"gin-blog-server/routers"
 )
@@ -14,11 +15,21 @@ func main() {
 	// 连接数据库
 	global.DB = core.InitGorm()
 
+	// 命令行参数绑定
+	option := flag.Parse()
+	if flag.IsWebStop(option) {
+		flag.SwitchOption(option)
+		return
+	}
+
 	// 初始化路由
 	router := routers.InitRouter()
 	addr := global.Config.System.Addr()
 	global.Log.Infof("gin-blog-server 运行在: %s", addr)
 
-	router.Run(addr)
+	err := router.Run(addr)
+	if err != nil {
+		global.Log.Fatalf(err.Error())
+	}
 
 }

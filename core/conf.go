@@ -2,12 +2,13 @@ package core
 
 import (
 	"fmt"
-	"gin-blog-server/config"
-	"gin-blog-server/global"
 	"log"
 	"os"
 
 	"gopkg.in/yaml.v2"
+
+	"gin-blog-server/config"
+	"gin-blog-server/global"
 )
 
 // 读取yaml配置文件
