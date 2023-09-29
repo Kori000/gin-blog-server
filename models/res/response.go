@@ -25,7 +25,7 @@ func Result(code int, data any, msg string, c *gin.Context) {
 	})
 }
 
-func Ok(data any, msg string, c *gin.Context) {
+func OkWith(data any, msg string, c *gin.Context) {
 	Result(SUCCESS, data, msg, c)
 }
 
@@ -35,6 +35,11 @@ func OkWithData(data any, c *gin.Context) {
 
 func OkWithMessage(msg string, c *gin.Context) {
 	Result(SUCCESS, map[string]any{}, msg, c)
+}
+
+func Ok(c *gin.Context) {
+	Result(SUCCESS, map[string]any{}, "success", c)
+
 }
 
 func Fail(data any, msg string, c *gin.Context) {

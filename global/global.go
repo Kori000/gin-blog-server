@@ -1,10 +1,10 @@
 package global
 
 import (
-	"gin-blog-server/config"
-
 	"github.com/sirupsen/logrus"
 	"gorm.io/gorm"
+
+	"gin-blog-server/config"
 )
 
 var (

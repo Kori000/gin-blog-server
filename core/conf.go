@@ -2,6 +2,7 @@ package core
 
 import (
 	"fmt"
+	"io/fs"
 	"log"
 	"os"
 
@@ -11,10 +12,11 @@ import (
 	"gin-blog-server/global"
 )
 
+const ConfigFile = "settings.yaml"
+
 // 读取yaml配置文件
 // go get gopkg.in/yaml.v2
 func InitCore() {
-	const ConfigFile = "settings.yaml"
 
 	c := &config.Config{}
 
@@ -31,4 +33,18 @@ func InitCore() {
 	log.Println("config yamlFile load init success.")
 
 	global.Config = c
+}
+
+func SetYaml() error {
+	byteData, err := yaml.Marshal(global.Config)
+	if err != nil {
+		return err
+	}
+
+	err = os.WriteFile(ConfigFile, byteData, fs.ModePerm)
+	if err != nil {
+		return err
+	}
+	global.Log.Info("yaml配置文件修改成功")
+	return nil
 }
