@@ -1,6 +1,7 @@
 package config
 
 type QiNiu struct {
+	Enable    bool    `yaml:"enable" json:"enable"` // 是否启用
 	AccessKey string  `yaml:"access_key" json:"access_key"`
 	SecretKey string  `yaml:"secret_key" json:"secret_key"`
 	Bucket    string  `yaml:"bucket" json:"bucket"` // 存储桶名称

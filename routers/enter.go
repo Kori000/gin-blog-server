@@ -1,9 +1,9 @@
 package routers
 
 import (
-	"gin-blog-server/global"
-
 	"github.com/gin-gonic/gin"
+
+	"gin-blog-server/global"
 )
 
 type RouterGroup struct {
@@ -19,8 +19,11 @@ func InitRouter() *gin.Engine {
 	apiRouterGourp := router.Group("api")
 
 	routerGroupApp := RouterGroup{apiRouterGourp}
+
 	// 系统配置api
 	routerGroupApp.SettingsRouter()
+	// 图片上传api
+	routerGroupApp.ImagesRouter()
 
 	return router
 }
