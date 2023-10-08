@@ -9,24 +9,27 @@ import (
 	"gin-blog-server/models/res"
 )
 
-func (SettingsApi) SettingsInfoView(c *gin.Context) {
-	res.OkWithData(global.Config.SiteInfo, c)
+func (SettingsApi) SettingsEmailInfoView(c *gin.Context) {
+	res.OkWithData(global.Config.Email, c)
 }
 
-func (SettingsApi) SettingsInfoUpdateView(c *gin.Context) {
-	var cr config.SiteInfo
+func (SettingsApi) SettingsEmailInfoUpdateView(c *gin.Context) {
+	var cr config.Email
+
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {
 		res.FailWithCode(res.ArgumentError, c)
 		return
 	}
 
-	global.Config.SiteInfo = cr
+	global.Config.Email = cr
 
 	err = core.SetYaml()
 	if err != nil {
 		global.Log.Error(err)
 		res.FailWithMessage(err.Error(), c)
+		return
 	}
+
 	res.Ok(c)
 }

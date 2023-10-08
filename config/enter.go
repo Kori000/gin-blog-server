@@ -1,5 +1,6 @@
 package config
 
+// 程序启动时, 会将所有 Config 保存在 Global
 type Config struct {
 	Mysql    Mysql    `yaml:"mysql"`
 	Logger   Logger   `yaml:"logger"`

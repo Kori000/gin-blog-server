@@ -7,5 +7,5 @@ type Email struct {
 	Password         string `yaml:"password" json:"password"`
 	DefaultFromEmail string `yaml:"default_from_email" json:"default_from_email"` // 默认的发件人名字
 	UseSSL           bool   `yaml:"use_ssl" json:"use_ssl"`                       // 是否使用 ssl
-	UserTls          bool   `yaml:"user_tls" json:"user_tls"`                     //
+	UserTls          bool   `yaml:"user_tls" json:"user_tls"`
 }
