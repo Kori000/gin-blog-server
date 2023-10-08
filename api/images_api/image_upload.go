@@ -1,9 +1,9 @@
 package images_api
 
 import (
+	"fmt"
 	"path"
 	"path/filepath"
-	"strconv"
 
 	"time"
 
@@ -37,7 +37,8 @@ func (ImagesApi) UploadImage(c *gin.Context) {
 	fileList, ok := form.File["images"]
 
 	if !ok {
-		res.FailWithMessage("images文件不存在", c)
+		res.FailWithMessage("文件不存在", c)
+		return
 	}
 
 	for _, file := range fileList {
@@ -55,7 +56,7 @@ func (ImagesApi) UploadImage(c *gin.Context) {
 			responseList = append(responseList, UploadResponse{
 				FileName:  file.Filename,
 				IsSuccess: false,
-				Msg:       "文件大小超出限制," + "最大" + strconv.Itoa(global.Config.Upload.Size) + "mb",
+				Msg:       fmt.Sprintf("文件大小超出限制, 最大 %vMB, 当前 %.2fMB", global.Config.Upload.Size, (float64(file.Size) / float64((1024 * 1024)))),
 			})
 			continue
 		}
