@@ -2,6 +2,7 @@ package images_api
 
 import (
 	"fmt"
+	"io"
 	"path"
 	"path/filepath"
 	"strings"
@@ -10,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"gin-blog-server/global"
+	"gin-blog-server/models"
 	"gin-blog-server/models/res"
 	"gin-blog-server/utils"
 )
@@ -56,9 +58,11 @@ func (ImagesApi) UploadImage(c *gin.Context) {
 
 	for _, file := range fileList {
 
+		fileName := file.Filename
+
 		// 拆分文件名和后缀
-		filenameWithoutExt := filepath.Base(file.Filename)
-		ext := strings.ToLower(filepath.Ext(file.Filename))
+		filenameWithoutExt := filepath.Base(fileName)
+		ext := strings.ToLower(filepath.Ext(fileName))
 		// 移除后缀
 		filenameWithoutExt = filenameWithoutExt[:len(filenameWithoutExt)-len(ext)]
 		// 使用Join构建新文件名
@@ -68,7 +72,7 @@ func (ImagesApi) UploadImage(c *gin.Context) {
 		res := utils.Contains(WhiteImageSuffixList, ext)
 		if !res {
 			responseList = append(responseList, UploadResponse{
-				FileName:  file.Filename,
+				FileName:  fileName,
 				IsSuccess: false,
 				Msg:       fmt.Sprintf("上传失败, 仅支持%s类型", strings.Join(WhiteImageSuffixList, " | ")),
 			})
@@ -78,31 +82,64 @@ func (ImagesApi) UploadImage(c *gin.Context) {
 		// 判断大小
 		if file.Size > maxSize {
 			responseList = append(responseList, UploadResponse{
-				FileName:  file.Filename,
+				FileName:  fileName,
 				IsSuccess: false,
 				Msg:       fmt.Sprintf("文件大小超出限制, 最大 %vMB, 当前 %.2fMB", global.Config.Upload.Size, (float64(file.Size) / float64((1024 * 1024)))),
 			})
 			continue
 		}
 
-		newFilePath := path.Join(global.Config.Upload.ImagePath+"/"+bucket, newFilename)
+		fileObj, err := file.Open()
+		if err != nil {
+			global.Log.Error(err.Error())
+		}
 
-		err := c.SaveUploadedFile(file, newFilePath)
+		byteData, err := io.ReadAll(fileObj)
 		if err != nil {
 			global.Log.Error(err)
 			responseList = append(responseList, UploadResponse{
-				FileName:  file.Filename,
+				FileName:  fileName,
 				IsSuccess: false,
 				Msg:       "服务器储存失败," + err.Error(),
 			})
 			continue
 		}
+		// md5 图片内容
+		md5Hash := utils.Md5(byteData)
+
+		// 查询数据库是否已经存在该图片
+
+		var bannerModel models.BannerModel
+
+		err = global.DB.Take(&bannerModel, "hash = ?", md5Hash).Error
+
+		// 如果没报错, 就是找到了
+		if err == nil {
+			responseList = append(responseList, UploadResponse{
+				FileName:  bannerModel.Name,
+				IsSuccess: false,
+				Msg:       "图片已存在",
+			})
+			continue
+		}
+
+		newFilePath := path.Join(global.Config.Upload.ImagePath+"/"+bucket, newFilename)
+
+		c.SaveUploadedFile(file, newFilePath)
 
 		responseList = append(responseList, UploadResponse{
-			FileName:  file.Filename,
+			FileName:  fileName,
 			IsSuccess: true,
 			Msg:       "上传成功",
 		})
+
+		// 图片入库
+		global.DB.Create(&models.BannerModel{
+			Path: newFilePath,
+			Hash: md5Hash,
+			Name: fileName,
+		})
+
 	}
 
 	res.OkWithData(responseList, c)
