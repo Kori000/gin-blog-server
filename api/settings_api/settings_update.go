@@ -1,8 +1,6 @@
 package settings_api
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 
 	"gin-blog-server/config"
@@ -19,10 +17,7 @@ func (SettingsApi) SettingsInfoUpdateView(c *gin.Context) {
 		return
 	}
 
-	fmt.Println("前", global.Config)
-
 	global.Config.SiteInfo = cr
-	fmt.Println("后", global.Config)
 
 	err = core.SetYaml()
 	if err != nil {
