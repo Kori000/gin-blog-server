@@ -4,13 +4,26 @@ import (
 	"fmt"
 	"path"
 	"path/filepath"
-
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
 
 	"gin-blog-server/global"
 	"gin-blog-server/models/res"
+	"gin-blog-server/utils"
+)
+
+var (
+	WhiteImageSuffixList = []string{
+		".jpg",
+		".jpeg",
+		".png",
+		".ico",
+		".tiff",
+		".svg",
+		".webp",
+	}
 )
 
 type UploadResponse struct {
@@ -45,11 +58,22 @@ func (ImagesApi) UploadImage(c *gin.Context) {
 
 		// 拆分文件名和后缀
 		filenameWithoutExt := filepath.Base(file.Filename)
-		ext := filepath.Ext(file.Filename)
+		ext := strings.ToLower(filepath.Ext(file.Filename))
 		// 移除后缀
 		filenameWithoutExt = filenameWithoutExt[:len(filenameWithoutExt)-len(ext)]
 		// 使用Join构建新文件名
 		newFilename := filenameWithoutExt + "----" + fileSuffix + ext
+
+		// 判断后缀
+		res := utils.Contains(WhiteImageSuffixList, ext)
+		if !res {
+			responseList = append(responseList, UploadResponse{
+				FileName:  file.Filename,
+				IsSuccess: false,
+				Msg:       fmt.Sprintf("上传失败, 仅支持%s类型", strings.Join(WhiteImageSuffixList, " | ")),
+			})
+			continue
+		}
 
 		// 判断大小
 		if file.Size > maxSize {
