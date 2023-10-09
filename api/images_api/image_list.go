@@ -20,7 +20,7 @@ func (ImagesApi) ImageListView(c *gin.Context) {
 
 	imageList, total, total_page, err := common.CommonList(models.BannerModel{}, common.Options{
 		PageInfo: cr,
-		Debug:    false,
+		Debug:    true,
 	})
 
 	if err != nil {

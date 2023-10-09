@@ -10,7 +10,7 @@ type MODEL struct {
 
 type PageInfo struct {
 	Page     int    `form:"page"`
-	Key      string `form:"key"`
 	PageSize int    `form:"page_size"`
 	Sort     string `form:"sort"`
+	Key      string `form:"key"`
 }

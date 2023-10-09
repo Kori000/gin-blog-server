@@ -46,8 +46,12 @@ func CommonList[T any](model T, option Options) (list []T, total int64, total_pa
 		offset = 0
 	}
 
+	if option.Sort == "" {
+		option.Sort = "created_at desc" // 默认时间排序
+	}
+
 	// 查询
-	err = DB.Model(&list).Limit(option.PageInfo.PageSize).Offset(offset).Find(&list).Error
+	err = DB.Model(&list).Limit(option.PageInfo.PageSize).Offset(offset).Order(option.Sort).Find(&list).Error
 
 	return list, total, total_page, err
 
