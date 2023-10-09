@@ -10,12 +10,12 @@ import (
 )
 
 type BannersEdit struct {
-	Name       string          `json:"name" gorm:"required"`        // 图片名称
-	OriginType ctype.ImageType `json:"origin_type" gorm:"required"` // 图片来源
+	Name       string          `json:"name" binding:"required" msg:"请输入名称"`          // 图片名称
+	OriginType ctype.ImageType `json:"origin_type" binding:"required" msg:"请输入来源类型"` // 图片来源
 }
 
 type BannersEditBody struct {
-	ID int `json:"id" binding:"required"`
+	ID int `json:"id" binding:"required" msg:"请输入id"`
 	BannersEdit
 }
 
@@ -28,7 +28,7 @@ func (BannerApi) BannersEditView(c *gin.Context) {
 	err := c.ShouldBindJSON(&cr)
 
 	if err != nil {
-		res.FailWithCode(res.ArgumentError, c)
+		res.FailWithError(err, &cr, c)
 		return
 	}
 	global.DB.Model(&imageList).Find(&imageList, cr.ID).Updates(BannersEdit{
