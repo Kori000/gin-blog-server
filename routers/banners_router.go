@@ -16,4 +16,7 @@ func (router RouterGroup) ImagesRouter() {
 	// 删除图片
 	router.POST("banner/remove", app.BannersRemoveView)
 
+	// 编辑图片
+	router.POST("banner/edit", app.BannersEditView)
+
 }
