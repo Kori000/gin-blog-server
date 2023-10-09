@@ -1,4 +1,4 @@
-package images_api
+package banners_api
 
 import (
 	"github.com/gin-gonic/gin"
@@ -8,13 +8,14 @@ import (
 	"gin-blog-server/service/common"
 )
 
-func (ImagesApi) ImageListView(c *gin.Context) {
+func (BannerApi) BannersListView(c *gin.Context) {
 
 	var cr models.PageInfo
 	err := c.ShouldBindQuery(&cr)
 
 	if err != nil {
-		res.FailWithCode(res.ArgumentError, c)
+		res.FailWithMessage(err.Error(), c)
+		// res.FailWithCode(res.ArgumentError, c)
 		return
 	}
 

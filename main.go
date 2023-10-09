@@ -21,6 +21,7 @@ func main() {
 		flag.SwitchOption(option)
 		return
 	}
+	flag.RemoveFile(option)
 
 	// 初始化路由
 	router := routers.InitRouter()

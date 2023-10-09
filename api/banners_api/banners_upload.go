@@ -1,4 +1,4 @@
-package images_api
+package banners_api
 
 import (
 	"fmt"
@@ -34,8 +34,8 @@ type UploadResponse struct {
 	Msg       string `json:"msg"`
 }
 
-// 上传单个图片, 返回图片 url
-func (ImagesApi) UploadImage(c *gin.Context) {
+// 上传图片
+func (BannerApi) BannersUploadView(c *gin.Context) {
 
 	maxSize := int64(global.Config.Upload.Size * 1024 * 1024) // 文件限制大小
 	bucket := time.Now().Format("2006-01-02")                 // 文件夹夹储存桶
