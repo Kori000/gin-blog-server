@@ -12,6 +12,19 @@ type Response struct {
 	Msg  string `json:"msg"`
 }
 
+type FailResponse struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
+}
+
+type ListResponse struct {
+	Code      int    `json:"code"`
+	Data      any    `json:"data"`
+	Msg       string `json:"msg"`
+	TotalPage int64  `json:"total_page"`
+	Total     int64  `json:"total"`
+}
+
 const (
 	SUCCESS = 200
 	ERROR   = -1
@@ -22,6 +35,23 @@ func Result(code int, data any, msg string, c *gin.Context) {
 		Code: code,
 		Data: data,
 		Msg:  msg,
+	})
+}
+
+func FailResult(code int, msg string, c *gin.Context) {
+	c.JSON(http.StatusOK, FailResponse{
+		Code: code,
+		Msg:  msg,
+	})
+}
+
+func ListResult(data any, total int64, total_page int64, c *gin.Context) {
+	c.JSON(http.StatusOK, ListResponse{
+		Code:      SUCCESS,
+		Data:      data,
+		TotalPage: total_page,
+		Total:     total,
+		Msg:       "OK",
 	})
 }
 
@@ -43,19 +73,19 @@ func Ok(c *gin.Context) {
 }
 
 func Fail(data any, msg string, c *gin.Context) {
-	Result(ERROR, data, msg, c)
+	FailResult(ERROR, msg, c)
 }
 
 func FailWithMessage(msg string, c *gin.Context) {
-	Result(ERROR, map[string]any{}, msg, c)
+	FailResult(ERROR, msg, c)
 }
 
 func FailWithCode(code ErrorCode, c *gin.Context) {
 	msg, ok := ErrorMap[code]
 	if ok {
-		Result(int(code), map[string]any{}, msg, c)
+		FailResult(int(code), msg, c)
 		return
 	} else {
-		Result(ERROR, map[string]any{}, "未知错误", c)
+		FailResult(ERROR, "未知错误", c)
 	}
 }
