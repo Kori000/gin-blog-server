@@ -42,4 +42,5 @@ func (BannerApi) BannersEditView(c *gin.Context) {
 	}
 
 	res.OkWith(imageList, "修改成功", c)
+
 }

@@ -12,7 +12,7 @@ import (
 
 type BannerModel struct {
 	MODEL
-	Path       string          `json:"path"`                         // 图片路径
+	Path       string          `json:"path" `                        // 图片路径
 	Hash       string          `json:"hash"`                         // 图片 hash 值,判断重复文件
 	Name       string          `json:"name" gorm:"size:255"`         // 图片名称
 	OriginType ctype.ImageType `json:"origin_type" gorm:"default:1"` // 图片来源

@@ -7,6 +7,8 @@ import (
 func (router RouterGroup) ImagesRouter() {
 	app := api.ApiGroupApp.BannerApi
 
+	qiniu := api.ApiGroupApp.QiNiuApi
+
 	// 获取 banner 图片列表
 	router.GET("banner/list", app.BannersListView)
 
@@ -19,4 +21,9 @@ func (router RouterGroup) ImagesRouter() {
 	// 编辑图片
 	router.POST("banner/edit", app.BannersEditView)
 
+	// 获取七牛云 token
+	router.GET("token/qiniu", qiniu.GetQiNiuToken)
+
+	// 测试 - 七牛云地址
+	router.POST("banner/qiniu", app.BannersUploadQiNiuView)
 }

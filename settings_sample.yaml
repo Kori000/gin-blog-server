@@ -51,10 +51,10 @@ email:
   use_ssl: false
   user_tls: false
 qiniu:
-  enable: true
-  access_key: "DSiVMvhK1idyOSeVpu4XBu0WR5vDKjNjosvGGGsA"
-  secret_key: "oDJjQW4psIwzUvA4q-XyVSs1kBrrXtzlPWE5HeAR"
-  bucket: "kori-foreign"
+  enable: false
+  access_key: "123"
+  secret_key: "123"
+  bucket: "123"
   cdn: "123"
   zone: "213"
   size: 0

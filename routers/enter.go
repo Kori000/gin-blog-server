@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"gin-blog-server/global"
+	"gin-blog-server/middleware"
 )
 
 type RouterGroup struct {
@@ -15,6 +16,8 @@ func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	// 初始化路由
 	router := gin.Default()
+
+	router.Use(middleware.Cors())
 
 	apiRouterGourp := router.Group("api")
 

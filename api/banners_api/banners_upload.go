@@ -28,13 +28,14 @@ var (
 	}
 )
 
+// 接口返回结构体
 type UploadResponse struct {
 	FileName  string `json:"file_name"`
 	IsSuccess bool   `json:"is_success"`
 	Msg       string `json:"msg"`
 }
 
-// 上传图片
+// 上传图片 - 服务器直传
 func (BannerApi) BannersUploadView(c *gin.Context) {
 
 	maxSize := int64(global.Config.Upload.Size * 1024 * 1024) // 文件限制大小

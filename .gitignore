@@ -1,3 +1,4 @@
 .env
 .vscode
 gin-blog-server
+settings.yaml
