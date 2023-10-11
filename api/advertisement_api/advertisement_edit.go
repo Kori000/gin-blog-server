@@ -1,6 +1,7 @@
 package advertisement_api
 
 import (
+	"github.com/fatih/structs"
 	"github.com/gin-gonic/gin"
 
 	"gin-blog-server/global"
@@ -8,16 +9,12 @@ import (
 	"gin-blog-server/models/res"
 )
 
-type AdvertEdit struct {
-	Title  string `json:"title" binding:"required" msg:"标题非法"`
-	Href   string `json:"href" binding:"required,url" msg:"跳转链接非法"`
-	Images string `json:"images" binding:"required,url" msg:"图片路径非法"`
-	IsShow *bool  `json:"is_show" binding:"required" msg:"缺少is_show字段"`
-}
-
 type AdvertEditBody struct {
-	ID int `json:"id" binding:"required" msg:"请输入id"`
-	AdvertEdit
+	models.MODEL `structs:"-"`
+	Title        string `json:"title" binding:"required" msg:"标题非法" structs:"title"`
+	Href         string `json:"href" binding:"required,url" msg:"跳转链接非法" structs:"href"`
+	Images       string `json:"images" binding:"required,url" msg:"图片路径非法" structs:"images"`
+	IsShow       *bool  `json:"is_show" binding:"required" msg:"缺少is_show字段" structs:"is_show"`
 }
 
 func (AdvertisementApi) AdvertisementEditView(c *gin.Context) {
@@ -33,12 +30,9 @@ func (AdvertisementApi) AdvertisementEditView(c *gin.Context) {
 		return
 	}
 
-	global.DB.Debug().Model(&commonList).Find(&commonList, cr.ID).Updates(AdvertEdit{
-		Title:  cr.Title,
-		Href:   cr.Href,
-		Images: cr.Images,
-		IsShow: cr.IsShow,
-	}).Count(&count)
+	maps := structs.Map(&cr)
+
+	global.DB.Debug().Model(&commonList).Find(&commonList, cr.ID).Updates(maps).Count(&count)
 
 	if count <= 0 {
 		res.FailWithCode(res.RecordNotFoundError, c)

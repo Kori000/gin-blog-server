@@ -1,6 +1,7 @@
 package banners_api
 
 import (
+	"github.com/fatih/structs"
 	"github.com/gin-gonic/gin"
 
 	"gin-blog-server/global"
@@ -9,14 +10,10 @@ import (
 	"gin-blog-server/models/res"
 )
 
-type BannersEdit struct {
-	Name       string          `json:"name" binding:"required" msg:"请输入名称"`          // 图片名称
-	OriginType ctype.ImageType `json:"origin_type" binding:"required" msg:"请输入来源类型"` // 图片来源
-}
-
 type BannersEditBody struct {
-	ID int `json:"id" binding:"required" msg:"请输入id"`
-	BannersEdit
+	models.MODEL `structs:"-"`
+	Name         string          `json:"name" binding:"required" msg:"请输入名称"`          // 图片名称
+	OriginType   ctype.ImageType `json:"origin_type" binding:"required" msg:"请输入来源类型"` // 图片来源
 }
 
 func (BannerApi) BannersEditView(c *gin.Context) {
@@ -31,10 +28,10 @@ func (BannerApi) BannersEditView(c *gin.Context) {
 		res.FailWithError(err, &cr, c)
 		return
 	}
-	global.DB.Model(&imageList).Find(&imageList, cr.ID).Updates(BannersEdit{
-		Name:       cr.Name,
-		OriginType: cr.OriginType,
-	}).Count(&count)
+
+	maps := structs.Map(&cr)
+
+	global.DB.Model(&imageList).Find(&imageList, cr.ID).Updates(maps).Count(&count)
 
 	if count <= 0 {
 		res.FailWithMessage("文件不存在", c)

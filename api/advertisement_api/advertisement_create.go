@@ -16,7 +16,6 @@ type AdvertRequest struct {
 }
 
 func (AdvertisementApi) AdvertisementCreateView(c *gin.Context) {
-
 	var cr AdvertRequest
 
 	err := c.ShouldBindJSON(&cr)

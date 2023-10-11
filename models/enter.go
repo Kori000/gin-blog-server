@@ -3,7 +3,7 @@ package models
 import "time"
 
 type MODEL struct {
-	ID        uint      `gorm:"primary_key" json:"id"`
+	ID        uint      `gorm:"primary_key" json:"id" msg:"请输入id"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"-"`
 }
