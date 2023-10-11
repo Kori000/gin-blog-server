@@ -26,9 +26,13 @@ func CommonList[T any](model T, option Options) (list []T, total int64, total_pa
 		DB = global.DB
 	}
 
+	global.Log.Infoln("✅", model)
+	query := DB.Where(model)
 	// 总条数 -- 最佳实践是前面都指定Model;
-	DB.Model(&list).Select("id").Count(&total)
+	query.Model(&list).Select("id").Count(&total)
 
+	// Select 会改变 model, 这里再一次 Where 进行复位
+	query = DB.Where(model)
 	// 计算总页数
 	total_page = int64(math.Ceil(float64(total) / float64(option.PageInfo.PageSize)))
 
@@ -51,7 +55,7 @@ func CommonList[T any](model T, option Options) (list []T, total int64, total_pa
 	}
 
 	// 查询
-	err = DB.Model(&list).Limit(option.PageInfo.PageSize).Offset(offset).Order(option.Sort).Find(&list).Error
+	err = query.Model(&list).Limit(option.PageInfo.PageSize).Offset(offset).Order(option.Sort).Find(&list).Error
 
 	return list, total, total_page, err
 
