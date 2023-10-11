@@ -37,7 +37,7 @@ func CommonList[T any](model T, option Options) (list []T, total int64, total_pa
 	total_page = int64(math.Ceil(float64(total) / float64(option.PageInfo.PageSize)))
 
 	// 是否超出总页数
-	if int64(option.PageInfo.Page) > total_page {
+	if int64(option.PageInfo.Page) > total_page && int64(option.PageInfo.Page) != 1 {
 		err = fmt.Errorf(fmt.Sprintf("超过最大页数,最大页数为 %v", total_page))
 		return
 	}

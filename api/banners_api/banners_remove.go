@@ -10,6 +10,7 @@ import (
 	"gin-blog-server/models/res"
 )
 
+// 批量删除
 func (BannerApi) BannersRemoveView(c *gin.Context) {
 	var count int64
 	var cr models.RemoveRequest
