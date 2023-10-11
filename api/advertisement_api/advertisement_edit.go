@@ -8,16 +8,23 @@ import (
 	"gin-blog-server/models/res"
 )
 
-type AdvertRequest struct {
+type AdvertEdit struct {
 	Title  string `json:"title" binding:"required" msg:"标题非法"`
 	Href   string `json:"href" binding:"required,url" msg:"跳转链接非法"`
 	Images string `json:"images" binding:"required,url" msg:"图片路径非法"`
 	IsShow *bool  `json:"is_show" binding:"required" msg:"缺少is_show字段"`
 }
 
-func (AdvertisementApi) AdvertisementCreateView(c *gin.Context) {
+type AdvertEditBody struct {
+	ID int `json:"id" binding:"required" msg:"请输入id"`
+	AdvertEdit
+}
 
-	var cr AdvertRequest
+func (AdvertisementApi) AdvertisementEditView(c *gin.Context) {
+
+	var commonList models.AdvertModel
+	var cr AdvertEditBody
+	var count int64
 
 	err := c.ShouldBindJSON(&cr)
 
@@ -26,27 +33,17 @@ func (AdvertisementApi) AdvertisementCreateView(c *gin.Context) {
 		return
 	}
 
-	var model models.AdvertModel
-	// 查询是否存在同名 title
-	err = global.DB.Model(&model).Take(&model, "title = ?", cr.Title).Error
-
-	if err == nil {
-		res.FailWithMessage("广告名称已存在", c)
-		return
-	}
-
-	// 新建数据模型
-	newModel := models.AdvertModel{
+	global.DB.Debug().Model(&commonList).Find(&commonList, cr.ID).Updates(AdvertEdit{
 		Title:  cr.Title,
 		Href:   cr.Href,
 		Images: cr.Images,
-		IsShow: *cr.IsShow,
+		IsShow: cr.IsShow,
+	}).Count(&count)
+
+	if count <= 0 {
+		res.FailWithCode(res.RecordNotFoundError, c)
+		return
 	}
 
-	err = global.DB.Model(&newModel).Create(&newModel).Error
-	if err != nil {
-		res.FailWithMessage("数据库错误", c)
-	}
-
-	res.OkWithData(newModel, c)
+	res.OkWithData(commonList, c)
 }

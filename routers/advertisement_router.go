@@ -12,7 +12,7 @@ func (router RouterGroup) AdvertisementRouter() {
 	// 广告创建
 	router.POST("advertisement/create", app.AdvertisementListView)
 	// 广告编辑
-	router.POST("advertisement/edit", app.AdvertisementCreateView)
+	router.POST("advertisement/edit", app.AdvertisementEditView)
 	// 广告删除
-	router.POST("advertisement/delete", app.AdvertisementCreateView)
+	router.POST("advertisement/remove", app.AdvertisementRemoveView)
 }
