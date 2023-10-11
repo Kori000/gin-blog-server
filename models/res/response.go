@@ -92,6 +92,7 @@ func FailWithCode(code ErrorCode, c *gin.Context) {
 	}
 }
 
+// 提示 validate 校验错误
 func FailWithError(err error, obj any, c *gin.Context) {
 	msg := utils.GetValidMsg(err, obj)
 	FailWithMessage(msg, c)
