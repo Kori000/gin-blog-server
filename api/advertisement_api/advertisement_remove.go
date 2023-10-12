@@ -10,6 +10,14 @@ import (
 	"gin-blog-server/models/res"
 )
 
+// @Tags 广告管理
+// @Summary 广告删除
+// @Description 广告删除
+// @Router /api/advertisement/remove [POST]
+// @Accept json
+// @Produce json
+// @Param data body models.RemoveRequest true " "
+// @Success 200
 func (AdvertisementApi) AdvertisementRemoveView(c *gin.Context) {
 	var count int64
 	var cr models.RemoveRequest
@@ -32,5 +40,5 @@ func (AdvertisementApi) AdvertisementRemoveView(c *gin.Context) {
 	global.DB.Model(&commonList).Delete(&commonList)
 	fmt.Printf("count: %v\n", count)
 
-	res.OkWith(commonList, fmt.Sprintf("成功删除%v个数据", count), c)
+	res.OkWithNoData(fmt.Sprintf("成功删除%v个数据", count), c)
 }

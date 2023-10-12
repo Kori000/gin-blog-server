@@ -8,6 +8,7 @@ import (
 func (router RouterGroup) SettingsRouter() {
 	settingsApi := api.ApiGroupApp.SettingsApi
 	// 站点信息
+	// @BasePath /api/
 	router.GET("settings/site", settingsApi.SettingsInfoView)
 	router.PUT("settings/site", settingsApi.SettingsInfoUpdateView)
 	// 邮件

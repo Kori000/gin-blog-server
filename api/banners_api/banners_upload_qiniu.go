@@ -14,10 +14,17 @@ import (
 
 // 对象存储方式的请求体
 type OssUploadBody struct {
-	ImageList []string `json:"image_list" binding:"required"`
+	ImageList []string `json:"image_list" binding:"required" `
 }
 
-// 上传图片 - 七牛云
+// @Tags 图片管理
+// @Summary 图片新增 - 地址形式
+// @Description 图片新增 - 地址形式
+// @Router /api/banner/upload/url [POST]
+// @Accept multipart/form-data
+// @Produce json
+// @Param data body OssUploadBody true "图片"
+// @Success 200
 func (BannerApi) BannersUploadQiNiuView(c *gin.Context) {
 
 	var responseList []UploadResponse // 响应体
@@ -71,5 +78,6 @@ func (BannerApi) BannersUploadQiNiuView(c *gin.Context) {
 
 	}
 
-	res.OkWithData(responseList, c)
+	res.OkWith(responseList, "success", c)
+
 }

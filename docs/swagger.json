@@ -1,0 +1,429 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {},
+        "version": "1.0.0"
+    },
+    "host": "127.0.0.1:4000",
+    "basePath": "/",
+    "paths": {
+        "/api/advertisement/create": {
+            "post": {
+                "description": "广告新增",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "广告管理"
+                ],
+                "summary": "广告新增",
+                "parameters": [
+                    {
+                        "description": "广告信息",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/advertisement_api.AdvertRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/advertisement/edit": {
+            "post": {
+                "description": "广告编辑",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "广告管理"
+                ],
+                "summary": "广告编辑",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/advertisement_api.AdvertEditBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/advertisement/list": {
+            "get": {
+                "description": "广告列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "广告管理"
+                ],
+                "summary": "广告列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/advertisement/remove": {
+            "post": {
+                "description": "广告删除",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "广告管理"
+                ],
+                "summary": "广告删除",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.RemoveRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/banner/edit": {
+            "post": {
+                "description": "图片编辑",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片管理"
+                ],
+                "summary": "图片编辑",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/banners_api.BannersEditBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/banner/list": {
+            "get": {
+                "description": "图片列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片管理"
+                ],
+                "summary": "图片列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 10,
+                        "name": "page_size",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/banner/remove": {
+            "post": {
+                "description": "图片批量删除",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片管理"
+                ],
+                "summary": "图片批量删除",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.RemoveRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/banner/upload": {
+            "post": {
+                "description": "图片新增 - 服务器直传",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片管理"
+                ],
+                "summary": "图片新增 - 服务器直传",
+                "parameters": [
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "file"
+                        },
+                        "collectionFormat": "csv",
+                        "description": "图片",
+                        "name": "images",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/banner/upload/url": {
+            "post": {
+                "description": "图片新增 - 地址形式",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片管理"
+                ],
+                "summary": "图片新增 - 地址形式",
+                "parameters": [
+                    {
+                        "description": "图片",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/banners_api.OssUploadBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "advertisement_api.AdvertEditBody": {
+            "type": "object",
+            "required": [
+                "href",
+                "images",
+                "is_show",
+                "title"
+            ],
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "default": "https://avatars.githubusercontent.com/u/9919?s=80\u0026v=4"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "images": {
+                    "type": "string",
+                    "default": "https://avatars.githubusercontent.com/u/9919?s=80\u0026v=4"
+                },
+                "is_show": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "title": {
+                    "type": "string",
+                    "default": "名称"
+                }
+            }
+        },
+        "advertisement_api.AdvertRequest": {
+            "type": "object",
+            "required": [
+                "href",
+                "images",
+                "is_show",
+                "title"
+            ],
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "default": "https://avatars.githubusercontent.com/u/9919?s=80\u0026v=4"
+                },
+                "images": {
+                    "type": "string",
+                    "default": "https://avatars.githubusercontent.com/u/9919?s=80\u0026v=4"
+                },
+                "is_show": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "title": {
+                    "type": "string",
+                    "default": "名称"
+                }
+            }
+        },
+        "banners_api.BannersEditBody": {
+            "type": "object",
+            "required": [
+                "name",
+                "origin_type"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "图片名称",
+                    "type": "string"
+                },
+                "origin_type": {
+                    "description": "图片来源",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/ctype.ImageType"
+                        }
+                    ]
+                }
+            }
+        },
+        "banners_api.OssUploadBody": {
+            "type": "object",
+            "required": [
+                "image_list"
+            ],
+            "properties": {
+                "image_list": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ctype.ImageType": {
+            "type": "integer",
+            "enum": [
+                1,
+                2
+            ],
+            "x-enum-comments": {
+                "Local": "本地服务器",
+                "QiNiu": "七牛云"
+            },
+            "x-enum-varnames": [
+                "Local",
+                "QiNiu"
+            ]
+        },
+        "models.RemoveRequest": {
+            "type": "object",
+            "required": [
+                "id_list"
+            ],
+            "properties": {
+                "id_list": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}

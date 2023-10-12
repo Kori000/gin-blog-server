@@ -10,7 +10,14 @@ import (
 	"gin-blog-server/models/res"
 )
 
-// 批量删除
+// @Tags 图片管理
+// @Summary 图片批量删除
+// @Description 图片批量删除
+// @Router /api/banner/remove [POST]
+// @Accept json
+// @Produce json
+// @Param data body models.RemoveRequest true " "
+// @Success 200
 func (BannerApi) BannersRemoveView(c *gin.Context) {
 	var count int64
 	var cr models.RemoveRequest

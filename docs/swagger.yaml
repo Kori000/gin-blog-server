@@ -1,0 +1,285 @@
+basePath: /
+definitions:
+  advertisement_api.AdvertEditBody:
+    properties:
+      href:
+        default: https://avatars.githubusercontent.com/u/9919?s=80&v=4
+        type: string
+      id:
+        type: integer
+      images:
+        default: https://avatars.githubusercontent.com/u/9919?s=80&v=4
+        type: string
+      is_show:
+        default: true
+        type: boolean
+      title:
+        default: 名称
+        type: string
+    required:
+    - href
+    - images
+    - is_show
+    - title
+    type: object
+  advertisement_api.AdvertRequest:
+    properties:
+      href:
+        default: https://avatars.githubusercontent.com/u/9919?s=80&v=4
+        type: string
+      images:
+        default: https://avatars.githubusercontent.com/u/9919?s=80&v=4
+        type: string
+      is_show:
+        default: true
+        type: boolean
+      title:
+        default: 名称
+        type: string
+    required:
+    - href
+    - images
+    - is_show
+    - title
+    type: object
+  banners_api.BannersEditBody:
+    properties:
+      id:
+        type: integer
+      name:
+        description: 图片名称
+        type: string
+      origin_type:
+        allOf:
+        - $ref: '#/definitions/ctype.ImageType'
+        description: 图片来源
+    required:
+    - name
+    - origin_type
+    type: object
+  banners_api.OssUploadBody:
+    properties:
+      image_list:
+        items:
+          type: string
+        type: array
+    required:
+    - image_list
+    type: object
+  ctype.ImageType:
+    enum:
+    - 1
+    - 2
+    type: integer
+    x-enum-comments:
+      Local: 本地服务器
+      QiNiu: 七牛云
+    x-enum-varnames:
+    - Local
+    - QiNiu
+  models.RemoveRequest:
+    properties:
+      id_list:
+        items:
+          type: integer
+        minItems: 1
+        type: array
+    required:
+    - id_list
+    type: object
+host: 127.0.0.1:4000
+info:
+  contact: {}
+  version: 1.0.0
+paths:
+  /api/advertisement/create:
+    post:
+      consumes:
+      - application/json
+      description: 广告新增
+      parameters:
+      - description: 广告信息
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/advertisement_api.AdvertRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 广告新增
+      tags:
+      - 广告管理
+  /api/advertisement/edit:
+    post:
+      consumes:
+      - application/json
+      description: 广告编辑
+      parameters:
+      - description: ' '
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/advertisement_api.AdvertEditBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 广告编辑
+      tags:
+      - 广告管理
+  /api/advertisement/list:
+    get:
+      consumes:
+      - application/json
+      description: 广告列表
+      parameters:
+      - default: 1
+        in: query
+        name: page
+        required: true
+        type: integer
+      - default: 10
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 广告列表
+      tags:
+      - 广告管理
+  /api/advertisement/remove:
+    post:
+      consumes:
+      - application/json
+      description: 广告删除
+      parameters:
+      - description: ' '
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.RemoveRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 广告删除
+      tags:
+      - 广告管理
+  /api/banner/edit:
+    post:
+      consumes:
+      - application/json
+      description: 图片编辑
+      parameters:
+      - description: ' '
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/banners_api.BannersEditBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 图片编辑
+      tags:
+      - 图片管理
+  /api/banner/list:
+    get:
+      consumes:
+      - application/json
+      description: 图片列表
+      parameters:
+      - default: 1
+        in: query
+        name: page
+        required: true
+        type: integer
+      - default: 10
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 图片列表
+      tags:
+      - 图片管理
+  /api/banner/remove:
+    post:
+      consumes:
+      - application/json
+      description: 图片批量删除
+      parameters:
+      - description: ' '
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.RemoveRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 图片批量删除
+      tags:
+      - 图片管理
+  /api/banner/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 图片新增 - 服务器直传
+      parameters:
+      - collectionFormat: csv
+        description: 图片
+        in: formData
+        items:
+          type: file
+        name: images
+        required: true
+        type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 图片新增 - 服务器直传
+      tags:
+      - 图片管理
+  /api/banner/upload/url:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 图片新增 - 地址形式
+      parameters:
+      - description: 图片
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/banners_api.OssUploadBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 图片新增 - 地址形式
+      tags:
+      - 图片管理
+swagger: "2.0"

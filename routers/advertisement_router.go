@@ -4,6 +4,7 @@ import (
 	"gin-blog-server/api"
 )
 
+// @Tags 广告管理
 func (router RouterGroup) AdvertisementRouter() {
 	app := api.ApiGroupApp.AdvertisementApi
 

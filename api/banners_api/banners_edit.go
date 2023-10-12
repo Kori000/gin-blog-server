@@ -16,6 +16,14 @@ type BannersEditBody struct {
 	OriginType   ctype.ImageType `json:"origin_type" binding:"required" msg:"请输入来源类型"` // 图片来源
 }
 
+// @Tags 图片管理
+// @Summary 图片编辑
+// @Description 图片编辑
+// @Router /api/banner/edit [POST]
+// @Accept json
+// @Produce json
+// @Param data body BannersEditBody true " "
+// @Success 200
 func (BannerApi) BannersEditView(c *gin.Context) {
 
 	var count int64
@@ -38,6 +46,6 @@ func (BannerApi) BannersEditView(c *gin.Context) {
 		return
 	}
 
-	res.OkWith(imageList, "修改成功", c)
+	res.OkWith(imageList, "编辑成功", c)
 
 }

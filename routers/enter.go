@@ -2,6 +2,8 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
 	"gin-blog-server/global"
 	"gin-blog-server/middleware"
@@ -16,6 +18,9 @@ func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	// 初始化路由
 	router := gin.Default()
+
+	// swagger router
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	router.Use(middleware.Cors())
 

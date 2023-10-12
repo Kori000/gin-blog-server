@@ -24,6 +24,6 @@ func (router RouterGroup) ImagesRouter() {
 	// 获取七牛云 token
 	router.GET("token/qiniu", qiniu.GetQiNiuToken)
 
-	// 测试 - 七牛云地址
-	router.POST("banner/qiniu", app.BannersUploadQiNiuView)
+	// 上传图片 - 七牛云地址
+	router.POST("banner/upload/url", app.BannersUploadQiNiuView)
 }

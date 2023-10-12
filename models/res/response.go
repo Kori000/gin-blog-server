@@ -9,22 +9,22 @@ import (
 )
 
 type Response struct {
-	Code int    `json:"code"`
+	Code int    `json:"code" default:"200"`
 	Data any    `json:"data"`
 	Msg  string `json:"msg"`
 }
 
 type FailResponse struct {
-	Code int    `json:"code"`
+	Code int    `json:"code" default:"-1"`
 	Msg  string `json:"msg"`
 }
 
 type ListResponse struct {
-	Code      int    `json:"code"`
+	Code      int    `json:"code" default:"200"`
 	Data      any    `json:"data"`
-	Msg       string `json:"msg"`
-	TotalPage int64  `json:"total_page"`
-	Total     int64  `json:"total"`
+	Msg       string `json:"msg" default:"success"`
+	TotalPage int64  `json:"total_page" default:"2"`
+	Total     int64  `json:"total" default:"20"`
 }
 
 const (
@@ -32,17 +32,17 @@ const (
 	ERROR   = -1
 )
 
-func Result(code int, data any, msg string, c *gin.Context) {
-	c.JSON(http.StatusOK, Response{
+func ResultWithNoData(code int, msg string, c *gin.Context) {
+	c.JSON(http.StatusOK, FailResponse{
 		Code: code,
-		Data: data,
 		Msg:  msg,
 	})
 }
 
-func FailResult(code int, msg string, c *gin.Context) {
-	c.JSON(http.StatusOK, FailResponse{
+func Result(code int, data any, msg string, c *gin.Context) {
+	c.JSON(http.StatusOK, Response{
 		Code: code,
+		Data: data,
 		Msg:  msg,
 	})
 }
@@ -69,26 +69,29 @@ func OkWithMessage(msg string, c *gin.Context) {
 	Result(SUCCESS, map[string]any{}, msg, c)
 }
 
+func OkWithNoData(msg string, c *gin.Context) {
+	ResultWithNoData(SUCCESS, msg, c)
+}
+
 func Ok(c *gin.Context) {
 	Result(SUCCESS, map[string]any{}, "success", c)
-
 }
 
 func Fail(data any, msg string, c *gin.Context) {
-	FailResult(ERROR, msg, c)
+	ResultWithNoData(ERROR, msg, c)
 }
 
 func FailWithMessage(msg string, c *gin.Context) {
-	FailResult(ERROR, msg, c)
+	ResultWithNoData(ERROR, msg, c)
 }
 
 func FailWithCode(code ErrorCode, c *gin.Context) {
 	msg, ok := ErrorMap[code]
 	if ok {
-		FailResult(int(code), msg, c)
+		ResultWithNoData(int(code), msg, c)
 		return
 	} else {
-		FailResult(ERROR, "未知错误", c)
+		ResultWithNoData(ERROR, "未知错误", c)
 	}
 }
 

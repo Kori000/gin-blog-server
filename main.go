@@ -2,11 +2,16 @@ package main
 
 import (
 	"gin-blog-server/core"
+	_ "gin-blog-server/docs"
 	"gin-blog-server/flag"
 	"gin-blog-server/global"
 	"gin-blog-server/routers"
 )
 
+// @Tittle gin-blog-server Api文档
+// @Version 1.0.0
+// @Host 127.0.0.1:4000
+// @BasePath /
 func main() {
 	// 加载环境变量
 	core.InitCore()

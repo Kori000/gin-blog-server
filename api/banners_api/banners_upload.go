@@ -3,6 +3,7 @@ package banners_api
 import (
 	"fmt"
 	"io"
+	"mime/multipart"
 	"path"
 	"path/filepath"
 	"strings"
@@ -35,7 +36,18 @@ type UploadResponse struct {
 	Msg       string `json:"msg"`
 }
 
-// 上传图片 - 服务器直传
+type UploadImagesRequest struct {
+	Images []*multipart.FileHeader `form:"images" binding:"required"`
+}
+
+// @Tags 图片管理
+// @Summary 图片新增 - 服务器直传
+// @Description 图片新增 - 服务器直传
+// @Router /api/banner/upload [POST]
+// @Accept multipart/form-data
+// @Produce json
+// @Param images formData []file true "图片"
+// @Success 200
 func (BannerApi) BannersUploadView(c *gin.Context) {
 
 	maxSize := int64(global.Config.Upload.Size * 1024 * 1024) // 文件限制大小
@@ -53,7 +65,7 @@ func (BannerApi) BannersUploadView(c *gin.Context) {
 	fileList, ok := form.File["images"]
 
 	if !ok {
-		res.FailWithMessage("文件不存在", c)
+		res.FailWithMessage("未找到文件", c)
 		return
 	}
 
@@ -143,5 +155,6 @@ func (BannerApi) BannersUploadView(c *gin.Context) {
 
 	}
 
-	res.OkWithData(responseList, c)
+	res.OkWith(responseList, "新增成功", c)
+
 }

@@ -10,6 +10,14 @@ import (
 	"gin-blog-server/service/common"
 )
 
+// @Tags 广告管理
+// @Summary 广告列表
+// @Description 广告列表
+// @Router /api/advertisement/list [GET]
+// @Accept json
+// @Produce json
+// @Param data query models.PageInfo true " "
+// @Success 200
 func (AdvertisementApi) AdvertisementListView(c *gin.Context) {
 
 	var cr models.PageInfo

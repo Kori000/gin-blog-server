@@ -8,6 +8,14 @@ import (
 	"gin-blog-server/service/common"
 )
 
+// @Tags 图片管理
+// @Summary 图片列表
+// @Description 图片列表
+// @Router /api/banner/list [GET]
+// @Accept json
+// @Produce json
+// @Param data query models.PageInfo true " "
+// @Success 200
 func (BannerApi) BannersListView(c *gin.Context) {
 
 	var cr models.PageInfo
