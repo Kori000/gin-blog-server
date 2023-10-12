@@ -9,10 +9,24 @@ import (
 	"gin-blog-server/models/res"
 )
 
+// @Tags 系统管理
+// @Summary 关于JWT - 获取
+// @Description 关于JWT - 获取
+// @Router /api/settings/jwt [GET]
+// @Accept json
+// @Success 200
 func (SettingsApi) SettingsJwtInfoView(c *gin.Context) {
 	res.OkWithData(global.Config.JWT, c)
 }
 
+// @Tags 系统管理
+// @Summary 关于JWT - 编辑
+// @Description 关于JWT - 编辑
+// @Router /api/settings/jwt [PUT]
+// @Accept json
+// @Produce json
+// @Param data body config.JWT true " "
+// @Success 200
 func (SettingsApi) SettingsJwtInfoUpdateView(c *gin.Context) {
 	var cr config.JWT
 	err := c.ShouldBindJSON(&cr)

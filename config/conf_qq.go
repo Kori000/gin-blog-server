@@ -3,9 +3,9 @@ package config
 import "fmt"
 
 type QQ struct {
-	AppID    string `yaml:"app_id" json:"app_id"`
-	Key      string `yaml:"key" json:"key"`
-	Redirect string `yaml:"redirect" json:"redirect"` // 重定向地址
+	AppID    string `yaml:"app_id" json:"app_id" default:"123"`
+	Key      string `yaml:"key" json:"key" default:"123"`
+	Redirect string `yaml:"redirect" json:"redirect" default:"123"` // 重定向地址
 }
 
 // 生成 Oauth url

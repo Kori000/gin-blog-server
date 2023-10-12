@@ -66,6 +66,141 @@ definitions:
     required:
     - image_list
     type: object
+  config.Email:
+    properties:
+      default_from_email:
+        default: "23"
+        description: 默认的发件人名字
+        type: string
+      host:
+        default: "1"
+        type: string
+      password:
+        default: "23"
+        type: string
+      port:
+        default: 0
+        type: integer
+      use_ssl:
+        default: false
+        description: 是否使用 ssl
+        type: boolean
+      user:
+        default: "23"
+        description: 发件人邮箱
+        type: string
+      user_tls:
+        default: false
+        type: boolean
+    type: object
+  config.JWT:
+    properties:
+      expires:
+        default: 0
+        description: 过期时间
+        type: integer
+      issuer:
+        default: "213"
+        description: 签发者
+        type: string
+      secret:
+        default: "213"
+        description: 秘钥
+        type: string
+    type: object
+  config.QQ:
+    properties:
+      app_id:
+        default: "123"
+        type: string
+      key:
+        default: "123"
+        type: string
+      redirect:
+        default: "123"
+        description: 重定向地址
+        type: string
+    type: object
+  config.QiNiu:
+    properties:
+      access_key:
+        default: DSiVMvhK1idyOSeVpu4XBu0WR5vDKjNjosvGGGsA
+        type: string
+      bucket:
+        default: kori-foreign
+        description: 存储桶名称
+        type: string
+      cdn:
+        default: "123"
+        description: 访问的地址前缀
+        type: string
+      enable:
+        default: true
+        description: 是否启用
+        type: boolean
+      secret_key:
+        default: oDJjQW4psIwzUvA4q-XyVSs1kBrrXtzlPWE5HeAR
+        type: string
+      size:
+        default: 0
+        description: 存储的大小限制, 单位 MB
+        type: number
+      zone:
+        default: "213"
+        description: 存储的地区
+        type: string
+    type: object
+  config.SiteInfo:
+    properties:
+      addr:
+        default: Earth
+        type: string
+      bilibili_url:
+        default: https://github.com/Kori000
+        type: string
+      created_at:
+        default: "2023-02-12"
+        type: string
+      email:
+        default: kexin@korix.com
+        type: string
+      filing:
+        default: 湘ICP备xxxxx号
+        type: string
+      gitee_url:
+        default: https://github.com/Kori000
+        type: string
+      github_urt:
+        default: https://github.com/Kori000
+        type: string
+      job:
+        default: FE
+        type: string
+      name:
+        default: KORIX
+        type: string
+      qq_image:
+        default: https://avatars.githubusercontent.com/u/9919?s=80&v=4
+        type: string
+      slogan:
+        default: "~"
+        type: string
+      slogan_en:
+        default: ~~
+        type: string
+      title:
+        default: 个人博客
+        type: string
+      version:
+        default: 0.0.1
+        type: string
+      web:
+        default: https://github.com/Kori000
+        type: string
+      wechat_image:
+        default: https://avatars.githubusercontent.com/u/9919?s=80&v=4
+        type: string
+    type: object
   ctype.ImageType:
     enum:
     - 1
@@ -282,4 +417,154 @@ paths:
       summary: 图片新增 - 地址形式
       tags:
       - 图片管理
+  /api/settings/email:
+    get:
+      consumes:
+      - application/json
+      description: 关于邮件 - 获取
+      responses:
+        "200":
+          description: OK
+      summary: 关于邮件 - 获取
+      tags:
+      - 系统管理
+    put:
+      consumes:
+      - application/json
+      description: 关于邮件 - 编辑
+      parameters:
+      - description: ' '
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/config.Email'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 关于邮件 - 编辑
+      tags:
+      - 系统管理
+  /api/settings/jwt:
+    get:
+      consumes:
+      - application/json
+      description: 关于JWT - 获取
+      responses:
+        "200":
+          description: OK
+      summary: 关于JWT - 获取
+      tags:
+      - 系统管理
+    put:
+      consumes:
+      - application/json
+      description: 关于JWT - 编辑
+      parameters:
+      - description: ' '
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/config.JWT'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 关于JWT - 编辑
+      tags:
+      - 系统管理
+  /api/settings/qiniu:
+    get:
+      consumes:
+      - application/json
+      description: 关于七牛云 - 获取
+      responses:
+        "200":
+          description: OK
+      summary: 关于七牛云 - 获取
+      tags:
+      - 系统管理
+    put:
+      consumes:
+      - application/json
+      description: 关于七牛云 - 编辑
+      parameters:
+      - description: ' '
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/config.QiNiu'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 关于七牛云 - 编辑
+      tags:
+      - 系统管理
+  /api/settings/qq:
+    get:
+      consumes:
+      - application/json
+      description: 关于QQ - 获取
+      responses:
+        "200":
+          description: OK
+      summary: 关于QQ - 获取
+      tags:
+      - 系统管理
+    put:
+      consumes:
+      - application/json
+      description: 关于QQ - 编辑
+      parameters:
+      - description: ' '
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/config.QQ'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 关于QQ - 编辑
+      tags:
+      - 系统管理
+  /api/settings/site:
+    get:
+      consumes:
+      - application/json
+      description: 关于站点 - 获取
+      responses:
+        "200":
+          description: OK
+      summary: 关于站点 - 获取
+      tags:
+      - 系统管理
+    put:
+      consumes:
+      - application/json
+      description: 关于站点 - 编辑
+      parameters:
+      - description: ' '
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/config.SiteInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 关于站点 - 编辑
+      tags:
+      - 系统管理
 swagger: "2.0"

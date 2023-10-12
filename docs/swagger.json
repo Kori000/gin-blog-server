@@ -297,6 +297,236 @@
                     }
                 }
             }
+        },
+        "/api/settings/email": {
+            "get": {
+                "description": "关于邮件 - 获取",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于邮件 - 获取",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "description": "关于邮件 - 编辑",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于邮件 - 编辑",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.Email"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/settings/jwt": {
+            "get": {
+                "description": "关于JWT - 获取",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于JWT - 获取",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "description": "关于JWT - 编辑",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于JWT - 编辑",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.JWT"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/settings/qiniu": {
+            "get": {
+                "description": "关于七牛云 - 获取",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于七牛云 - 获取",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "description": "关于七牛云 - 编辑",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于七牛云 - 编辑",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.QiNiu"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/settings/qq": {
+            "get": {
+                "description": "关于QQ - 获取",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于QQ - 获取",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "description": "关于QQ - 编辑",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于QQ - 编辑",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.QQ"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/settings/site": {
+            "get": {
+                "description": "关于站点 - 获取",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于站点 - 获取",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "description": "关于站点 - 编辑",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统管理"
+                ],
+                "summary": "关于站点 - 编辑",
+                "parameters": [
+                    {
+                        "description": " ",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.SiteInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -392,6 +622,187 @@
                     "items": {
                         "type": "string"
                     }
+                }
+            }
+        },
+        "config.Email": {
+            "type": "object",
+            "properties": {
+                "default_from_email": {
+                    "description": "默认的发件人名字",
+                    "type": "string",
+                    "default": "23"
+                },
+                "host": {
+                    "type": "string",
+                    "default": "1"
+                },
+                "password": {
+                    "type": "string",
+                    "default": "23"
+                },
+                "port": {
+                    "type": "integer",
+                    "default": 0
+                },
+                "use_ssl": {
+                    "description": "是否使用 ssl",
+                    "type": "boolean",
+                    "default": false
+                },
+                "user": {
+                    "description": "发件人邮箱",
+                    "type": "string",
+                    "default": "23"
+                },
+                "user_tls": {
+                    "type": "boolean",
+                    "default": false
+                }
+            }
+        },
+        "config.JWT": {
+            "type": "object",
+            "properties": {
+                "expires": {
+                    "description": "过期时间",
+                    "type": "integer",
+                    "default": 0
+                },
+                "issuer": {
+                    "description": "签发者",
+                    "type": "string",
+                    "default": "213"
+                },
+                "secret": {
+                    "description": "秘钥",
+                    "type": "string",
+                    "default": "213"
+                }
+            }
+        },
+        "config.QQ": {
+            "type": "object",
+            "properties": {
+                "app_id": {
+                    "type": "string",
+                    "default": "123"
+                },
+                "key": {
+                    "type": "string",
+                    "default": "123"
+                },
+                "redirect": {
+                    "description": "重定向地址",
+                    "type": "string",
+                    "default": "123"
+                }
+            }
+        },
+        "config.QiNiu": {
+            "type": "object",
+            "properties": {
+                "access_key": {
+                    "type": "string",
+                    "default": "DSiVMvhK1idyOSeVpu4XBu0WR5vDKjNjosvGGGsA"
+                },
+                "bucket": {
+                    "description": "存储桶名称",
+                    "type": "string",
+                    "default": "kori-foreign"
+                },
+                "cdn": {
+                    "description": "访问的地址前缀",
+                    "type": "string",
+                    "default": "123"
+                },
+                "enable": {
+                    "description": "是否启用",
+                    "type": "boolean",
+                    "default": true
+                },
+                "secret_key": {
+                    "type": "string",
+                    "default": "oDJjQW4psIwzUvA4q-XyVSs1kBrrXtzlPWE5HeAR"
+                },
+                "size": {
+                    "description": "存储的大小限制, 单位 MB",
+                    "type": "number",
+                    "default": 0
+                },
+                "zone": {
+                    "description": "存储的地区",
+                    "type": "string",
+                    "default": "213"
+                }
+            }
+        },
+        "config.SiteInfo": {
+            "type": "object",
+            "properties": {
+                "addr": {
+                    "type": "string",
+                    "default": "Earth"
+                },
+                "bilibili_url": {
+                    "type": "string",
+                    "default": "https://github.com/Kori000"
+                },
+                "created_at": {
+                    "type": "string",
+                    "default": "2023-02-12"
+                },
+                "email": {
+                    "type": "string",
+                    "default": "kexin@korix.com"
+                },
+                "filing": {
+                    "type": "string",
+                    "default": "湘ICP备xxxxx号"
+                },
+                "gitee_url": {
+                    "type": "string",
+                    "default": "https://github.com/Kori000"
+                },
+                "github_urt": {
+                    "type": "string",
+                    "default": "https://github.com/Kori000"
+                },
+                "job": {
+                    "type": "string",
+                    "default": "FE"
+                },
+                "name": {
+                    "type": "string",
+                    "default": "KORIX"
+                },
+                "qq_image": {
+                    "type": "string",
+                    "default": "https://avatars.githubusercontent.com/u/9919?s=80\u0026v=4"
+                },
+                "slogan": {
+                    "type": "string",
+                    "default": "~"
+                },
+                "slogan_en": {
+                    "type": "string",
+                    "default": "~~"
+                },
+                "title": {
+                    "type": "string",
+                    "default": "个人博客"
+                },
+                "version": {
+                    "type": "string",
+                    "default": "0.0.1"
+                },
+                "web": {
+                    "type": "string",
+                    "default": "https://github.com/Kori000"
+                },
+                "wechat_image": {
+                    "type": "string",
+                    "default": "https://avatars.githubusercontent.com/u/9919?s=80\u0026v=4"
                 }
             }
         },

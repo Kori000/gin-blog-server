@@ -74,7 +74,7 @@ func OkWithNoData(msg string, c *gin.Context) {
 }
 
 func Ok(c *gin.Context) {
-	Result(SUCCESS, map[string]any{}, "success", c)
+	ResultWithNoData(SUCCESS, "success", c)
 }
 
 func Fail(data any, msg string, c *gin.Context) {

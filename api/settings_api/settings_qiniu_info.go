@@ -9,10 +9,24 @@ import (
 	"gin-blog-server/models/res"
 )
 
+// @Tags 系统管理
+// @Summary 关于七牛云 - 获取
+// @Description 关于七牛云 - 获取
+// @Router /api/settings/qiniu [GET]
+// @Accept json
+// @Success 200
 func (SettingsApi) SettingsQiNiuInfoView(c *gin.Context) {
 	res.OkWithData(global.Config.QiNiu, c)
 }
 
+// @Tags 系统管理
+// @Summary 关于七牛云 - 编辑
+// @Description 关于七牛云 - 编辑
+// @Router /api/settings/qiniu [PUT]
+// @Accept json
+// @Produce json
+// @Param data body config.QiNiu true " "
+// @Success 200
 func (SettingsApi) SettingsQiNiuInfoUpdateView(c *gin.Context) {
 	var cr config.QiNiu
 	err := c.ShouldBindJSON(&cr)

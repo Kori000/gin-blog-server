@@ -9,10 +9,24 @@ import (
 	"gin-blog-server/models/res"
 )
 
+// @Tags 系统管理
+// @Summary 关于邮件 - 获取
+// @Description 关于邮件 - 获取
+// @Router /api/settings/email [GET]
+// @Accept json
+// @Success 200
 func (SettingsApi) SettingsEmailInfoView(c *gin.Context) {
 	res.OkWithData(global.Config.Email, c)
 }
 
+// @Tags 系统管理
+// @Summary 关于邮件 - 编辑
+// @Description 关于邮件 - 编辑
+// @Router /api/settings/email [PUT]
+// @Accept json
+// @Produce json
+// @Param data body config.Email true " "
+// @Success 200
 func (SettingsApi) SettingsEmailInfoUpdateView(c *gin.Context) {
 	var cr config.Email
 
