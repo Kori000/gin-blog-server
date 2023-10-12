@@ -552,6 +552,26 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/test": {
+            "get": {
+                "description": "功能测试",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "测试模块"
+                ],
+                "summary": "功能测试",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     },
     "definitions": {

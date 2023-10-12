@@ -578,4 +578,17 @@ paths:
       summary: 七牛云Token - 获取
       tags:
       - Token管理
+  /test:
+    get:
+      consumes:
+      - application/json
+      description: 功能测试
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 功能测试
+      tags:
+      - 测试模块
 swagger: "2.0"

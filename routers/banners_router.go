@@ -21,4 +21,5 @@ func (router RouterGroup) ImagesRouter() {
 
 	// 上传图片 - 七牛云地址
 	router.POST("banner/upload/url", app.BannersUploadQiNiuView)
+
 }

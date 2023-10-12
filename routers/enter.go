@@ -30,6 +30,8 @@ func InitRouter() *gin.Engine {
 
 	// 系统配置
 	routerGroupApp.SettingsRouter()
+	// 功能测试
+	routerGroupApp.TestRouter()
 	// Token管理
 	routerGroupApp.TokenRouter()
 	// 图片管理
