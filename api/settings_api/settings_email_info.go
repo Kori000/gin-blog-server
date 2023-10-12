@@ -9,7 +9,7 @@ import (
 	"gin-blog-server/models/res"
 )
 
-// @Tags 系统管理
+// @Tags 系统配置管理
 // @Summary 关于邮件 - 获取
 // @Description 关于邮件 - 获取
 // @Router /api/settings/email [GET]
@@ -19,7 +19,7 @@ func (SettingsApi) SettingsEmailInfoView(c *gin.Context) {
 	res.OkWithData(global.Config.Email, c)
 }
 
-// @Tags 系统管理
+// @Tags 系统配置管理
 // @Summary 关于邮件 - 编辑
 // @Description 关于邮件 - 编辑
 // @Router /api/settings/email [PUT]

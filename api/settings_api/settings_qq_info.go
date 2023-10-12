@@ -9,7 +9,7 @@ import (
 	"gin-blog-server/models/res"
 )
 
-// @Tags 系统管理
+// @Tags 系统配置管理
 // @Summary 关于QQ - 获取
 // @Description 关于QQ - 获取
 // @Router /api/settings/qq [GET]
@@ -19,7 +19,7 @@ func (SettingsApi) SettingsQQInfoView(c *gin.Context) {
 	res.OkWithData(global.Config.QQ, c)
 }
 
-// @Tags 系统管理
+// @Tags 系统配置管理
 // @Summary 关于QQ - 编辑
 // @Description 关于QQ - 编辑
 // @Router /api/settings/qq [PUT]

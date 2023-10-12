@@ -313,7 +313,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于邮件 - 获取",
                 "responses": {
@@ -331,7 +331,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于邮件 - 编辑",
                 "parameters": [
@@ -359,7 +359,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于JWT - 获取",
                 "responses": {
@@ -377,7 +377,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于JWT - 编辑",
                 "parameters": [
@@ -405,7 +405,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于七牛云 - 获取",
                 "responses": {
@@ -423,7 +423,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于七牛云 - 编辑",
                 "parameters": [
@@ -451,7 +451,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于QQ - 获取",
                 "responses": {
@@ -469,7 +469,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于QQ - 编辑",
                 "parameters": [
@@ -497,7 +497,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于站点 - 获取",
                 "responses": {
@@ -515,7 +515,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "系统管理"
+                    "系统配置管理"
                 ],
                 "summary": "关于站点 - 编辑",
                 "parameters": [
@@ -529,6 +529,23 @@ const docTemplate = `{
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/token/qiniu": {
+            "get": {
+                "description": "七牛云Token - 获取",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Token管理"
+                ],
+                "summary": "七牛云Token - 获取",
                 "responses": {
                     "200": {
                         "description": "OK"

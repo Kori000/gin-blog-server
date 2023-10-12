@@ -427,7 +427,7 @@ paths:
           description: OK
       summary: 关于邮件 - 获取
       tags:
-      - 系统管理
+      - 系统配置管理
     put:
       consumes:
       - application/json
@@ -446,7 +446,7 @@ paths:
           description: OK
       summary: 关于邮件 - 编辑
       tags:
-      - 系统管理
+      - 系统配置管理
   /api/settings/jwt:
     get:
       consumes:
@@ -457,7 +457,7 @@ paths:
           description: OK
       summary: 关于JWT - 获取
       tags:
-      - 系统管理
+      - 系统配置管理
     put:
       consumes:
       - application/json
@@ -476,7 +476,7 @@ paths:
           description: OK
       summary: 关于JWT - 编辑
       tags:
-      - 系统管理
+      - 系统配置管理
   /api/settings/qiniu:
     get:
       consumes:
@@ -487,7 +487,7 @@ paths:
           description: OK
       summary: 关于七牛云 - 获取
       tags:
-      - 系统管理
+      - 系统配置管理
     put:
       consumes:
       - application/json
@@ -506,7 +506,7 @@ paths:
           description: OK
       summary: 关于七牛云 - 编辑
       tags:
-      - 系统管理
+      - 系统配置管理
   /api/settings/qq:
     get:
       consumes:
@@ -517,7 +517,7 @@ paths:
           description: OK
       summary: 关于QQ - 获取
       tags:
-      - 系统管理
+      - 系统配置管理
     put:
       consumes:
       - application/json
@@ -536,7 +536,7 @@ paths:
           description: OK
       summary: 关于QQ - 编辑
       tags:
-      - 系统管理
+      - 系统配置管理
   /api/settings/site:
     get:
       consumes:
@@ -547,7 +547,7 @@ paths:
           description: OK
       summary: 关于站点 - 获取
       tags:
-      - 系统管理
+      - 系统配置管理
     put:
       consumes:
       - application/json
@@ -566,5 +566,16 @@ paths:
           description: OK
       summary: 关于站点 - 编辑
       tags:
-      - 系统管理
+      - 系统配置管理
+  /api/token/qiniu:
+    get:
+      consumes:
+      - application/json
+      description: 七牛云Token - 获取
+      responses:
+        "200":
+          description: OK
+      summary: 七牛云Token - 获取
+      tags:
+      - Token管理
 swagger: "2.0"

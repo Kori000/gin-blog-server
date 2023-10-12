@@ -1,4 +1,4 @@
-package qiniu_api
+package token_api
 
 import (
 	"fmt"
@@ -16,7 +16,13 @@ type TokenReponse struct {
 	Expires uint64 `json:"expires"`
 }
 
-func (QiNiuApi) GetQiNiuToken(c *gin.Context) {
+// @Tags Token管理
+// @Summary 七牛云Token - 获取
+// @Description 七牛云Token - 获取
+// @Router /api/token/qiniu [GET]
+// @Accept json
+// @Success 200
+func (TokenApi) GetQiNiuToken(c *gin.Context) {
 
 	accessKey := global.Config.QiNiu.AccessKey
 	secretKey := global.Config.QiNiu.SecretKey

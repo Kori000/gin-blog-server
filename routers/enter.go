@@ -28,8 +28,10 @@ func InitRouter() *gin.Engine {
 
 	routerGroupApp := RouterGroup{apiRouterGourp}
 
-	// 系统配置api
+	// 系统配置
 	routerGroupApp.SettingsRouter()
+	// Token管理
+	routerGroupApp.TokenRouter()
 	// 图片管理
 	routerGroupApp.ImagesRouter()
 	// 广告管理

@@ -9,7 +9,7 @@ import (
 	"gin-blog-server/models/res"
 )
 
-// @Tags 系统管理
+// @Tags 系统配置管理
 // @Summary 关于七牛云 - 获取
 // @Description 关于七牛云 - 获取
 // @Router /api/settings/qiniu [GET]
@@ -19,7 +19,7 @@ func (SettingsApi) SettingsQiNiuInfoView(c *gin.Context) {
 	res.OkWithData(global.Config.QiNiu, c)
 }
 
-// @Tags 系统管理
+// @Tags 系统配置管理
 // @Summary 关于七牛云 - 编辑
 // @Description 关于七牛云 - 编辑
 // @Router /api/settings/qiniu [PUT]
