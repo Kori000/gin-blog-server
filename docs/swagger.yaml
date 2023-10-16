@@ -236,18 +236,18 @@ definitions:
         items:
           $ref: '#/definitions/menu_api.ImageSort'
         type: array
-      menu_title:
-        type: string
-      menu_title_en:
+      path:
         type: string
       slogan:
         type: string
       sort:
         type: integer
+      title:
+        type: string
     required:
-    - menu_title
-    - menu_title_en
+    - path
     - sort
+    - title
     type: object
   models.RemoveRequest:
     properties:
@@ -485,6 +485,32 @@ paths:
         "200":
           description: OK
       summary: 菜单新增
+      tags:
+      - 菜单管理
+  /api/menu/list:
+    get:
+      consumes:
+      - application/json
+      description: 菜单列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 菜单列表
+      tags:
+      - 菜单管理
+  /api/menu/name/list:
+    get:
+      consumes:
+      - application/json
+      description: 菜单列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 菜单列表
       tags:
       - 菜单管理
   /api/settings/email:

@@ -4,4 +4,4 @@ gin-blog-server
 settings.yaml
 main
 go
-
+uploads

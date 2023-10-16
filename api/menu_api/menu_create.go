@@ -15,8 +15,8 @@ type ImageSort struct {
 }
 
 type MenuRequest struct {
-	MenuTitle     string      `json:"menu_title" binding:"required" msg:"请完善菜单名称"`
-	MenuTitleEn   string      `json:"menu_title_en" binding:"required" msg:"请完善菜单英文名称"`
+	Title         string      `json:"title" binding:"required" msg:"请完善菜单名称"`
+	Path          string      `json:"path" binding:"required" msg:"请完善菜单路径"`
 	Slogan        string      `json:"slogan"`
 	Abstract      ctype.Array `json:"abstract"`      // 简介
 	AbstractTime  int         `json:"abstract_time"` // 简介的切换时间
@@ -43,10 +43,9 @@ func (MenuApi) MenuCreateView(c *gin.Context) {
 	}
 
 	// 创建banner数据入库
-
 	menuModel := models.MenuModel{
-		MenuTitle:    cr.MenuTitle,
-		MenuTitleEn:  cr.MenuTitleEn,
+		Title:        cr.Title,
+		Path:         cr.Path,
 		Slogan:       cr.Slogan,
 		Abstract:     cr.Abstract,
 		AbstractTime: cr.AbstractTime,

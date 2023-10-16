@@ -21,7 +21,7 @@ type MenuResponse struct {
 // @Tags 菜单管理
 // @Summary 菜单列表
 // @Description 菜单列表
-// @Router /api/menu/ list [POST]
+// @Router /api/menu/list [GET]
 // @Accept json
 // @Produce json
 // @Success 200
@@ -35,7 +35,7 @@ func (MenuApi) MenuListView(c *gin.Context) {
 		res.FailWithMessage(err.Error(), c)
 		return
 	}
-	var menuBanners []models.MenuBannerModel // 查询[菜单-banner 连接表]
+	var menuBanners []models.MenuBannerModel // 查询[菜单-banner连接表]
 
 	err = global.DB.Model(menuBanners).Preload("BannerModel").Order("sort").Find(&menuBanners, "menu_id in ?", menuIDList).Error
 
@@ -46,6 +46,11 @@ func (MenuApi) MenuListView(c *gin.Context) {
 	}
 	// 接口返回格式
 	var menus []MenuResponse
+
+	if len(menuList) == 0 {
+		res.OkWithData([]MenuResponse{}, c)
+		return
+	}
 
 	// 循环整个菜单列表
 	for _, model := range menuList {

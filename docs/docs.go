@@ -357,6 +357,46 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/menu/list": {
+            "get": {
+                "description": "菜单列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "菜单列表",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/menu/name/list": {
+            "get": {
+                "description": "菜单列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "菜单列表",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/api/settings/email": {
             "get": {
                 "description": "关于邮件 - 获取",
@@ -931,9 +971,9 @@ const docTemplate = `{
         "menu_api.MenuRequest": {
             "type": "object",
             "required": [
-                "menu_title",
-                "menu_title_en",
-                "sort"
+                "path",
+                "sort",
+                "title"
             ],
             "properties": {
                 "abstract": {
@@ -957,10 +997,7 @@ const docTemplate = `{
                         "$ref": "#/definitions/menu_api.ImageSort"
                     }
                 },
-                "menu_title": {
-                    "type": "string"
-                },
-                "menu_title_en": {
+                "path": {
                     "type": "string"
                 },
                 "slogan": {
@@ -968,6 +1005,9 @@ const docTemplate = `{
                 },
                 "sort": {
                     "type": "integer"
+                },
+                "title": {
+                    "type": "string"
                 }
             }
         },
