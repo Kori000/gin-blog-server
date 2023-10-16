@@ -9,6 +9,8 @@ func (router RouterGroup) MenuRouter() {
 
 	// 菜单列表
 	router.GET("menu/list", app.MenuListView)
+	// 菜单名称列表
+	router.GET("menu/name/list", app.MenuNameListView)
 	// 菜单创建
 	router.POST("menu/create", app.MenuCreateView)
 	// 菜单编辑
