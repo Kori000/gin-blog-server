@@ -211,6 +211,26 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/banner/name/list": {
+            "get": {
+                "description": "获取图片名称列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "图片管理"
+                ],
+                "summary": "图片名称列表",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/api/banner/remove": {
             "post": {
                 "description": "图片批量删除",
@@ -536,24 +556,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/token/qiniu": {
-            "get": {
-                "description": "七牛云Token - 获取",
-                "consumes": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Token管理"
-                ],
-                "summary": "七牛云Token - 获取",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/test": {
+        "/api/test": {
             "get": {
                 "description": "功能测试",
                 "consumes": [
@@ -566,6 +569,23 @@ const docTemplate = `{
                     "测试模块"
                 ],
                 "summary": "功能测试",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/token/qiniu": {
+            "get": {
+                "description": "七牛云Token - 获取",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Token管理"
+                ],
+                "summary": "七牛云Token - 获取",
                 "responses": {
                     "200": {
                         "description": "OK"

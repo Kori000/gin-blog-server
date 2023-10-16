@@ -355,6 +355,19 @@ paths:
       summary: 图片列表
       tags:
       - 图片管理
+  /api/banner/name/list:
+    get:
+      consumes:
+      - application/json
+      description: 获取图片名称列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 图片名称列表
+      tags:
+      - 图片管理
   /api/banner/remove:
     post:
       consumes:
@@ -567,18 +580,7 @@ paths:
       summary: 关于站点 - 编辑
       tags:
       - 系统配置管理
-  /api/token/qiniu:
-    get:
-      consumes:
-      - application/json
-      description: 七牛云Token - 获取
-      responses:
-        "200":
-          description: OK
-      summary: 七牛云Token - 获取
-      tags:
-      - Token管理
-  /test:
+  /api/test:
     get:
       consumes:
       - application/json
@@ -591,4 +593,15 @@ paths:
       summary: 功能测试
       tags:
       - 测试模块
+  /api/token/qiniu:
+    get:
+      consumes:
+      - application/json
+      description: 七牛云Token - 获取
+      responses:
+        "200":
+          description: OK
+      summary: 七牛云Token - 获取
+      tags:
+      - Token管理
 swagger: "2.0"

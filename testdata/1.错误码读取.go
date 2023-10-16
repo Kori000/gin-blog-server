@@ -3,10 +3,11 @@ package testdata
 import (
 	"encoding/json"
 	"fmt"
-	"gin-blog-server/models/res"
 	"os"
 
 	"github.com/sirupsen/logrus"
+
+	"gin-blog-server/models/res"
 )
 
 const file = "models/res/err_code.json"

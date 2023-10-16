@@ -10,6 +10,9 @@ func (router RouterGroup) ImagesRouter() {
 	// 获取 banner 图片列表
 	router.GET("banner/list", app.BannersListView)
 
+	// 获取 banner 图片名称列表
+	router.GET("banner/name/list", app.BannersNameListView)
+
 	// 上传图片
 	router.POST("banner/upload", app.BannersUploadView)
 
