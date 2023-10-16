@@ -212,6 +212,43 @@ definitions:
     x-enum-varnames:
     - Local
     - QiNiu
+  menu_api.ImageSort:
+    properties:
+      image_id:
+        type: integer
+      sort:
+        type: integer
+    type: object
+  menu_api.MenuRequest:
+    properties:
+      abstract:
+        description: 简介
+        items:
+          type: string
+        type: array
+      abstract_time:
+        description: 简介的切换时间
+        type: integer
+      banner_time:
+        description: 菜单图片的切换时间 0 表示不切换
+        type: integer
+      image_sort_list:
+        items:
+          $ref: '#/definitions/menu_api.ImageSort'
+        type: array
+      menu_title:
+        type: string
+      menu_title_en:
+        type: string
+      slogan:
+        type: string
+      sort:
+        type: integer
+    required:
+    - menu_title
+    - menu_title_en
+    - sort
+    type: object
   models.RemoveRequest:
     properties:
       id_list:
@@ -430,6 +467,26 @@ paths:
       summary: 图片新增 - 地址形式
       tags:
       - 图片管理
+  /api/menu/create:
+    post:
+      consumes:
+      - application/json
+      description: 菜单新增
+      parameters:
+      - description: 菜单信息
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/menu_api.MenuRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: 菜单新增
+      tags:
+      - 菜单管理
   /api/settings/email:
     get:
       consumes:

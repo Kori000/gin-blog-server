@@ -38,6 +38,8 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.ImagesRouter()
 	// 广告管理
 	routerGroupApp.AdvertisementRouter()
+	// 菜单管理
+	routerGroupApp.MenuRouter()
 
 	return router
 }

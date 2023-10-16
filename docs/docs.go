@@ -326,6 +326,37 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/menu/create": {
+            "post": {
+                "description": "菜单新增",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "菜单新增",
+                "parameters": [
+                    {
+                        "description": "菜单信息",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/menu_api.MenuRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/api/settings/email": {
             "get": {
                 "description": "关于邮件 - 获取",
@@ -885,6 +916,60 @@ const docTemplate = `{
                 "Local",
                 "QiNiu"
             ]
+        },
+        "menu_api.ImageSort": {
+            "type": "object",
+            "properties": {
+                "image_id": {
+                    "type": "integer"
+                },
+                "sort": {
+                    "type": "integer"
+                }
+            }
+        },
+        "menu_api.MenuRequest": {
+            "type": "object",
+            "required": [
+                "menu_title",
+                "menu_title_en",
+                "sort"
+            ],
+            "properties": {
+                "abstract": {
+                    "description": "简介",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "abstract_time": {
+                    "description": "简介的切换时间",
+                    "type": "integer"
+                },
+                "banner_time": {
+                    "description": "菜单图片的切换时间 0 表示不切换",
+                    "type": "integer"
+                },
+                "image_sort_list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/menu_api.ImageSort"
+                    }
+                },
+                "menu_title": {
+                    "type": "string"
+                },
+                "menu_title_en": {
+                    "type": "string"
+                },
+                "slogan": {
+                    "type": "string"
+                },
+                "sort": {
+                    "type": "integer"
+                }
+            }
         },
         "models.RemoveRequest": {
             "type": "object",
