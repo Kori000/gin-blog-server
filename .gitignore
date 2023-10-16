@@ -5,3 +5,4 @@ settings.yaml
 main
 go
 uploads
+.DS_Store
